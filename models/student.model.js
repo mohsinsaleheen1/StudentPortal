@@ -18,7 +18,7 @@ const studentRegistrationSchema = mongoose.Schema({
     required: true,
   },
   studentRegistrationNumber: {
-    type: Number,
+    type: String,
     required: true,
   },
   studentClass: {
@@ -29,7 +29,7 @@ const studentRegistrationSchema = mongoose.Schema({
     type: String,
     enum: ["A", "B", "C"],
   },
-  studentDOF: {
+  studentDOB: {
     type: Date,
     required: true,
   },
@@ -52,6 +52,11 @@ const studentRegistrationSchema = mongoose.Schema({
   guardianContact: {
     type: String,
     required: true,
+  },
+  role: {
+    type: String,
+    required: true,
+    default: "Admin",
   },
 });
 const student = mongoose.model("student", studentRegistrationSchema);

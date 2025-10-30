@@ -61,5 +61,10 @@ const teacherRegistrationSchema = mongoose.Schema({
     type: String,
     enum: ["Male", "Female", "Other"],
   },
+  role: {
+    type: String,
+    required: true,
+    default: "Admin",
+  },
 });
 module.exports = teacherRegistrationSchema;

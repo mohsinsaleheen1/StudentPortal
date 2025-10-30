@@ -33,7 +33,7 @@ const studentRegistrationSchema = mongoose.Schema({
     type: Date,
     required: true,
   },
-  StudentGender: {
+  studentGender: {
     type: String,
     enum: ["Male", "Female", "Other"],
   },

@@ -67,4 +67,8 @@ const teacherRegistrationSchema = mongoose.Schema({
     default: "Admin",
   },
 });
-module.exports = teacherRegistrationSchema;
+const teacherSchema = mongoose.model(
+  "teacherSchema",
+  teacherRegistrationSchema
+);
+module.exports = teacherSchema;

@@ -1,7 +1,9 @@
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const studentData = require("../models/student.model.js");
-const teacherData = require("../models/teacher.model.js");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config();
 const studentregister = async (req, res) => {
   try {
     const {
@@ -98,15 +100,24 @@ const teacherRegister = async (req, res) => {
 };
 const login = async (req, res) => {
   try {
-    const { studentEmail, studentpassword } = req.body;
-    const dbUser = await userModel.findOne({ studentEmail });
-    const isMatch = await bcrypt.compare(
-      studentpassword,
-      dbUser.studentpassword
-    );
+    const { userEmail, userPass } = req.body;
+    const dbUser = await userModel.findOne({ userEmail });
+    const isMatch = await bcrypt.compare(userPass, dbUser.userPass);
     if (!isMatch)
       return res.status(400).json({ message: "Invalid Credentials" });
     res.send();
+    let token = jwt.sign(
+      {
+        email: dbUser.userEmail,
+        role: dbUser.role,
+      },
+      process.env.JWTSECRET
+    );
+    res.send({
+      status: 200,
+      message: "user login successfully",
+      token,
+    });
   } catch (err) {
     res.send({
       status: 500,

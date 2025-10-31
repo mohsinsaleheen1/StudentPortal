@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
 const connectDb = require("./config/db.js");
+const login = require("./routes/auth.route.js");
 const teacherRoute = require("./routes/teacher.route.js");
 const studentRoute = require("./routes/student.route.js");
 const adminRoute = require("./routes/adminrout.js");
+const authorization = require("./middleware/authentication.js");
 const dotenv = require("dotenv");
 const cors = require("cors");
 dotenv.config();
@@ -12,9 +14,10 @@ connectDb();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
-app.use("/api/teacher", teacherRoute);
-app.use("/api/student", studentRoute);
-app.use("/api/admin", adminRoute);
+app.use("/api/login", login);
+app.use("/api/admin", authorization, adminRoute);
+app.use("/api/teacher", authorization, teacherRoute);
+app.use("/api/student", authorization, studentRoute);
 app.listen(port, () => {
   console.log(`Server is runing at http://localhost:${port}`);
 });

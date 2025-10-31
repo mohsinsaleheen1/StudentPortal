@@ -5,11 +5,10 @@ const {
   deleteStudent,
 } = require("../controllers/student");
 const {
-  teacherRegister,
   updateteacher,
   deleteteacher,
 } = require("../controllers/teacher");
-const { studentregister } = require("../controllers/auth");
+const { studentregister, teacherRegister } = require("../controllers/auth");
 const router = express.Router();
 // Student
 router.post("/studentregister", studentregister);

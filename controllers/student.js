@@ -44,7 +44,7 @@ const updateStudent = async (req, res) => {
     const updateStd = await studentData.findByIdAndUpdate(stdId, req.body, {
       new: true,
     });
-    if (!singleStd) {
+    if (!updateStd) {
       res.send({
         status: 404,
         message: "Student Not Found",

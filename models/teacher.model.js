@@ -63,8 +63,7 @@ const teacherRegistrationSchema = mongoose.Schema({
   },
   role: {
     type: String,
-    required: true,
-    default: "Admin",
+    enum:['admin','teacher','student']
   },
 });
 const teacherSchema = mongoose.model(

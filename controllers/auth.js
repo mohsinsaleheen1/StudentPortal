@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt");
-const saltRounds = 10;
 const studentData = require("../models/student.model.js");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
@@ -20,6 +19,7 @@ const studentregister = async (req, res) => {
       studentAddress,
       guardianName,
       guardianContact,
+      role,
     } = req.body;
     const hashpassword = await bcrypt.hash(userPass, 10);
     const newStudent = {
@@ -36,9 +36,11 @@ const studentregister = async (req, res) => {
       studentAddress,
       guardianName,
       guardianContact,
+      role,
     };
     const result = new studentData(newStudent);
     const savedstd = await result.save();
+    res.json(savedstd);
     res.send({
       message: "Reistered successfully",
       result,
@@ -47,7 +49,7 @@ const studentregister = async (req, res) => {
   } catch (err) {
     res.send({
       status: 500,
-      err,
+      err:err,
       message: "sorry! server is not responding",
     });
   }
@@ -67,6 +69,7 @@ const teacherRegister = async (req, res) => {
       joiningDate,
       Address,
       gender,
+      role,
     } = req.body;
     const hashpassword = await bcrypt.hash(userPass, 10);
     const newteacher = {
@@ -82,6 +85,7 @@ const teacherRegister = async (req, res) => {
       joiningDate,
       Address,
       gender,
+      roles,
     };
     const result = new studentData(newteacher);
     const savedstd = await result.save();
@@ -100,7 +104,7 @@ const teacherRegister = async (req, res) => {
 };
 const login = async (req, res) => {
   try {
-    const { userEmail, userPass } = req.body;
+    const { userEmail, userPass, role } = req.body;
     const dbUser = await userModel.findOne({ userEmail });
     const isMatch = await bcrypt.compare(userPass, dbUser.userPass);
     if (!isMatch)

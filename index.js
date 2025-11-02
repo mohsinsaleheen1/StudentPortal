@@ -14,10 +14,10 @@ connectDb();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
-app.use("/api/login", login);
-app.use("/api/admin", authorization, adminRoute);
-app.use("/api/teacher", authorization, teacherRoute);
-app.use("/api/student", authorization, studentRoute);
+app.use("/api", login);
+app.use("/api/admin", adminRoute);
+app.use("/api/teacher", teacherRoute);
+app.use("/api/student", studentRoute);
 app.listen(port, () => {
   console.log(`Server is runing at http://localhost:${port}`);
 });

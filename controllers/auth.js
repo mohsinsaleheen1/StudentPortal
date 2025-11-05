@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const studentData = require("../models/student.model.js");
+const teacherData = require("../models/teacher.model.js")
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -85,10 +86,11 @@ const teacherRegister = async (req, res) => {
       joiningDate,
       Address,
       gender,
-      roles,
+      role,
     };
-    const result = new studentData(newteacher);
-    const savedstd = await result.save();
+    const result = new teacherData(newteacher);
+    const savedtea = await result.save();
+    res.json(savedtea)
     res.send({
       message: "Reistered successfully",
       result,

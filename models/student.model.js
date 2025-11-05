@@ -8,12 +8,12 @@ const studentRegistrationSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  studentEmail: {
+  userEmail: {
     type: String,
     required: true,
     unique: true,
   },
-  studentpassword: {
+  userPass: {
     type: String,
     required: true,
   },

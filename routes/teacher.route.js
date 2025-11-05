@@ -4,5 +4,5 @@ const { getTeachers } = require("../controllers/teacher");
 const router = express.Router();
 router.get("/getallstudents", getAllstudents);
 // Teacher Routes
-router.get("/:id", getTeachers);
+router.get("/getsingleteacher/:id", getTeachers);
 module.exports = router;
